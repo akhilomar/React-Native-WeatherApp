@@ -38,6 +38,7 @@ export default class SearchScreen extends React.Component{
   }
   render(){
     renderCity=<Card><List.Item title="No city selected" /></Card>
+    
     if(this.state.cities.length>0){
       renderCity=this.state.cities.map(city=>{
         return (
@@ -59,9 +60,13 @@ export default class SearchScreen extends React.Component{
       <Button  mode="contained" style={{margin:20, backgroundColor: '#576574'}} onPress={() => this.buttonclick()}>
         Save City
       </Button>
+    
       <ScrollView>
         {renderCity}
       </ScrollView>
+
+ 
+
     </View>
   );
 }

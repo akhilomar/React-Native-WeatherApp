@@ -5,8 +5,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { TextInput, Card, List, Title } from 'react-native-paper';
 import * as Font from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
-
-
+import LottieView from 'lottie-react-native';
 
 
 export default class HomeScreen extends React.Component{
@@ -21,6 +20,8 @@ export default class HomeScreen extends React.Component{
       loading: true,
  
   }
+
+  
   
   async getWeather(){
       var Mycity;
@@ -52,6 +53,7 @@ export default class HomeScreen extends React.Component{
   }
  
 async componentDidMount(){
+
     await Font.loadAsync({
         'FredokaOne_Regular': require('../assets/fonts/FredokaOne-Regular.ttf'),
         'Montserrat_Bold': require('../assets/fonts/Montserrat-Bold.ttf'),
@@ -67,6 +69,7 @@ async componentDidMount(){
     }
   return (
     <View style={styles.container}>
+     
       <Header title="Current Weather" />
       <Card style={{margin: 20, backgroundColor:"#30336b" }} >
                 <View style={{padding:20, alignItems:'center'}} >
@@ -77,8 +80,18 @@ async componentDidMount(){
             <Title style={styles.text2} >TEMPERATURE : {this.state.info.temp} °C</Title>
             <Title style={styles.text2}>DESCRIPTION : {this.state.info.desc}</Title>
             <Title style={styles.text2}>HUMIDITY : {this.state.info.humidity}</Title>
-        </View>
+           
+        </View>    
+        
       
+   
+      </Card>
+      <Card >
+      <LottieView style={styles.animationContainer} 
+        source={require('../assets/animation.json')}
+        autoPlay
+        loop
+      />
       </Card>
     </View>
   );
@@ -86,7 +99,7 @@ async componentDidMount(){
 }
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+
     backgroundColor: '#f4f4f4'
    },
    text1:{
@@ -102,6 +115,10 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     color: '#48dbfb',
     fontSize: 20
+},
+animationContainer:{
+paddingTop: 200,
+backgroundColor:"#30336b"
 }
 });
 
