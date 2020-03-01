@@ -6,7 +6,7 @@ import { TextInput, Card, List, Title } from 'react-native-paper';
 import * as Font from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
 import LottieView from 'lottie-react-native';
-
+ 
 
 export default class HomeScreen extends React.Component{
   state={
@@ -51,21 +51,36 @@ export default class HomeScreen extends React.Component{
       })
       
   }
- 
-async componentDidMount(){
+
+  playAnimation(){ 
+    this.animation.reset();
+    this.animation.play();
+   
+  }
+
+
+async componentDidMount(){  
+    
 
     await Font.loadAsync({
         'FredokaOne_Regular': require('../assets/fonts/FredokaOne-Regular.ttf'),
         'Montserrat_Bold': require('../assets/fonts/Montserrat-Bold.ttf'),
         ...Ionicons.font,
+        
       });
       this,this.setState({loading: false})
     this.getWeather();
+    this.playAnimation();
+   
+    
 }
 
+
   render(){
+    
     if(this.props.navigation.getParam('city')){
-        this.getWeather()
+        this.getWeather()        
+        this.playAnimation()
     }
   return (
     <View style={styles.container}>
@@ -87,11 +102,20 @@ async componentDidMount(){
    
       </Card>
       <Card >
-      <LottieView style={styles.animationContainer} 
+      <LottieView
+          ref={animation => {
+            this.animation = animation;
+          }}
+          style={styles.animationContainer}
+          source={require('../assets/animation.json')}
+          // OR find more Lottie files @ https://lottiefiles.com/featured
+          // Just click the one you like, place that file in the 'assets' folder to the left, and replace the above 'require' statement
+        />
+      {/* <LottieView style={styles.animationContainer} 
         source={require('../assets/animation.json')}
         autoPlay
         loop
-      />
+      /> */}
       </Card>
     </View>
   );
@@ -100,7 +124,7 @@ async componentDidMount(){
 const styles = StyleSheet.create({
   container: {
 
-    backgroundColor: '#f4f4f4'
+    
    },
    text1:{
        fontFamily : 'FredokaOne_Regular',
@@ -118,7 +142,9 @@ const styles = StyleSheet.create({
 },
 animationContainer:{
 paddingTop: 200,
-backgroundColor:"#30336b"
+backgroundColor:"#30336b",
+margin:20,
+
 }
 });
 

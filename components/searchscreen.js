@@ -37,7 +37,7 @@ export default class SearchScreen extends React.Component{
     console.log(this.state.cities);
   }
   render(){
-    renderCity=<Card><List.Item title="No city selected" /></Card>
+    var renderCity=<Card><List.Item title="No city selected" /></Card>
     
     if(this.state.cities.length>0){
       renderCity=this.state.cities.map(city=>{
